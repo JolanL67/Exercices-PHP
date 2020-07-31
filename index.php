@@ -470,4 +470,95 @@ function triangle(int $hauteur) {
 
 echo triangle(10);
 
+// Exercice 29, Suite de Fibonacci
+// « Possédant initialement un couple de lapins, combien de couples obtient-on en douze mois si chaque couple engendre tous les mois un nouveau couple à compter du second mois de son existence ? »
+// Creez une fonction qui prend un argument de type int, cela correspondra à la durée en mois de la reproduction des lapins, votre fonction doit retourner le nombre de couples.
+
+function fibonacci(int $months) {
+    
+    $nouveauCouple = 0;
+    $couple = 1;
+
+    if ($months <= 0 || !is_int($months)) {
+        return false;
+    }
+    if ($months == 1) {
+        return $nouveauCouple + $couple;
+    }
+    for ($i = 1; $i < $months; $i++) {
+        $result = $couple + $nouveauCouple;
+        $nouveauCouple = $couple;
+        $couple = $result;
+    }
+    return $result;
+
+}
+
+echo fibonacci(4) . PHP_EOL;
+echo '<br />';
+
+/* Exercice 30, Conjugaison
+Créez une fonction qui prend une string en argument, l'argument sera un verbe régulier du premier groupe (finissant par "er"). Votre fonction doit conjuguer ce verbe au présent de l'indicatif.
+Contrainte:
+La chaîne passée en argument ne doit pas dépasser 15 caractères ni contenir d'espaces.
+Vérifiez que la chaîne passée en argument se termine bien par "er".
+*/
+
+function conjugaison(string $verbes) {
+
+    if (substr($verbes, -2) == "er") {
+        if (strlen($verbes) <= 15) {
+            if (preg_match("/ /", $verbes)) {
+                echo 'Votre chaîne de caractères contient un espace.';
+            } else {
+                $verbesConjugaison = preg_replace('/([a-zA-Z])er$/', '$1', $verbes);
+                $conjugaison = [
+                    'Je ' . $verbesConjugaison . 'e',
+                    'Tu ' . $verbesConjugaison . 'es',
+                    'Il ' . $verbesConjugaison . 'e',
+                    'Nous ' . $verbesConjugaison . 'ons',
+                    'Vous ' . $verbesConjugaison . 'ez',
+                    'Ils ' . $verbesConjugaison . 'ent',
+    
+                ];
+                foreach ($conjugaison as $verbe) {
+                    // var_dump($verbe);
+                    echo $verbe . '<br />';
+                }
+            }
+        }
+        else {
+            echo 'Votre chaîne de caractères ne doit pas dépasser 15 caractères.';
+        }
+    }
+    else {
+        echo 'Ce verbe n\'est pas un verbe du 1er groupe.';
+    }
+}
+
+echo conjugaison('aimttttttttttttttttttter') . '<br />';
+echo conjugaison('aimer') . '<br />';
+echo conjugaison('ai mer') . '<br />';
+
+/* Exercice 31, Table de multiplication binaire
+Créez une fonction qui prend en argument un entier positif non nul, cela correspondra au nombre de lignes et de colonnes d'une table de multiplication. Tous les nombres affichés doivent être des nombres en base binaire. 
+Vous devez séparer les nombres sur une ligne par des caractères de tabulation.
+Remarque:
+Vous pouvez utiliser la fonction decbin() si vous avez du mal à résoudre cet exercice, cependant il est possible et plus interessant de ne pas l'utiliser.
+Exemple :
+En entrée : 6
+En sortie :
+1       10       11       100       101       110
+10      100      110      1000      1010      1100
+11      110      1001     1100      1111      10010
+100     1000     1100     10000     10100     11000
+101     1010     1111     10100     11001     11110
+110     1100     10010    11000     11110     100100
+Commencez par la gauche et ajoutez un 0 ou un 1 à chaque case du tableau pour obtenir le nombre que vous souhaitez.
+*/
+
+function binaire(int $int) {
+
+}
+
 ?>
